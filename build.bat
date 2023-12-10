@@ -9,7 +9,8 @@ popd
 
 Pushd %~dp0
 cd backend
-copy * ..\client\dist\
+::copy * ..\client\dist\
+robocopy backend ..\client\dist\ /s /XD .idea /XD __pycache__
 echo %cd%
 popd
 

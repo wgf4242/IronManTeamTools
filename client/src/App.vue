@@ -1,85 +1,91 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
 
-    <div class="wrapper">
-      <!-- <HelloWorld msg="You did it!" /> -->
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div id="container">
+    <div id="left">
+      <div class="item">Search</div>
+      <ul>
+        <li>
+          <input type="text" placeholder="Search">
+        </li>
+        <li class="item white">工具列表</li>
+        <RouterLink to="/common">  <li class="item">常规解码</li></RouterLink>
+        <RouterLink to="/aes"><li class="item">AES/DES/3DES/Rabbit</li></RouterLink>
+        <li class="item"></li>
+        <li class="item"></li>
+      </ul>
     </div>
-  </header>
+<!--    <div id="center">-->
+<!--      Tool2-->
+<!--    </div>-->
+    <div id="right">
+      <RouterView />
+    </div>
+  </div>
 
-  <RouterView />
+
+<!--  <header>-->
+<!--     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
+<!--    <div class="wrapper">-->
+<!--       <HelloWorld msg="You did it!" /> -->
+<!--      <nav><RouterLink to="/">Home</RouterLink></nav>-->
+<!--    </div>-->
+<!--  </header>-->
+
+
 </template>
 
 <style scoped>
-/* header {
-  line-height: 1.5;
-  max-height: 100vh;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
+#header,
+#footer {
+  background: #eee;
   text-align: center;
-  margin-top: 2rem;
+  height: 60px;
+  line-height: 60px;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+#container {
+  display: flex;
+  height: calc(100vh - 120px);
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+#left {
+  width: 300px;
+  /*background: #f00;*/
+  border: 1px solid #eee;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+/*#center {*/
+/*  width: 100px;*/
+/*  !*background: #515050;*!*/
+/*  border: 1px solid #eee;*/
+/*}*/
+
+#right {
+  flex: 1;
+  /*background: #0a0;*/
+  border: 1px solid #eee;
+  /* height: 100vh;overflow: hidden; */
 }
 
-nav a:first-of-type {
-  border: 0;
+#left ul {
+  padding: 0;
+}
+a,a:visited{
+  color: unset;
+  text-decoration: none;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-} */
 </style>

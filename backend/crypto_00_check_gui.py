@@ -10,8 +10,7 @@ crypto_00_check_gui.py
 pip install fastapi base58 base45 bubblepy base91
 """
 
-import sys
-
+from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -49,6 +48,12 @@ async def root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+@app.get("/get_wordlists", response_class=HTMLResponse)
+async def get_wordlists():
+    lst = [file.name for file in Path('wordlists').rglob('*')]
+    return lst
+
+
 import Crypto_00_check as check
 
 
@@ -77,11 +82,26 @@ async def decrypt(request: Request):
     return JSONResponse(content=res)
 
 
+from Crypto_aes_CryptoJS import decrypt as aes_decrypt
+
+
+@app.post("/aes", response_class=HTMLResponse)
+async def decrypt_aes(request: Request):
+    r = await request.json()
+    enc = r.get('enc').encode()
+    key = r.get('key').encode()
+    res = aes_decrypt(enc, key)
+    if not res:
+        return '失败'
+    return res
+
+
 @app.post("/getInformation")
 async def getInformation(info: Request):
     req_info = await info.body()
     # req_info = await info.json()
     return req_info
+
 
 # 最后加强它方便防止和前面冲突
 app.mount("/", StaticFiles(directory=".", html=True), name="static")
@@ -90,7 +110,6 @@ app.mount("/", StaticFiles(directory=".", html=True), name="static")
 import uvicorn
 
 if __name__ == '__main__':
-    from pathlib import Path
     import webbrowser
 
     file = Path(__file__)

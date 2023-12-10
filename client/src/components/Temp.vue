@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    <h1>解码工具</h1>
-
     <div>
-      <input v-model="enc" @keyup="test" @change="test">
+      <input v-model="enc" @keyup="submit" @change="submit">
     </div>
-    <button @click="test">Decode</button>
+    <button @click="submit">Decrypt</button>
     <table>
       <tr v-for="(v, k, i) in plain">
         <td>{{ k }}</td>
@@ -33,7 +31,7 @@ export default {
           .catch(() => alert("err"))
       }
     }
-    const test = () => {
+    const submit = () => {
       fetch('http://127.0.0.1:8000/test', {
         method: 'POST',
         body: enc.value
@@ -42,7 +40,7 @@ export default {
       }).then(r => plain.value = r)
     }
     console.log('123')
-    return { test, copy, enc, plain }
+    return { submit, copy, enc, plain }
   }
 }
 </script>
