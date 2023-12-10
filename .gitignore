@@ -1,0 +1,58 @@
+create.bat
+~$*
+
+# backend
+**/.idea
+**/db.sqlite3
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+**/__pycache__/
+backend/src/**.xls*
+backend/src/assets
+backend/staticsites
+backend/media/
+backend/assets/
+backend/images/
+backend/venv/
+
+# Windows
+[Dd]esktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+**/.vscode
+
+# macOS
+.DS_Store
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+
+# Node.js
+node_modules/
+dist/
+backend/**/token.json
+package-lock.json
+pnpm-lock.yaml
+
+# Vite
+components.d.ts
+
+# Hbuilder
+.hbuilderx
+uni_modules
+unpackage
+
+# Android files
+
+android/**/.gradle/
+android/**/build/
+android/**/debug/
+android/**/libs/
+android/**/release/
+android/**/assets/apps/
+
+*.log
+*.out
+Android-SDK@*

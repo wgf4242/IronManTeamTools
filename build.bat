@@ -1,0 +1,20 @@
+@echo off
+::client
+Pushd %~dp0
+cd client
+echo %cd%
+call pnpm build
+popd 
+
+
+Pushd %~dp0
+cd backend
+copy * ..\client\dist\
+echo %cd%
+popd
+
+
+echo release file in client\dist\
+echo start by this command below:
+echo 开发者用这个启动
+echo cd client\dist\ ^&^& python crypto_00_check_gui.py
