@@ -18,10 +18,10 @@ jobs:
         node-version: 14
     
     - name: Install dependencies
-      run: cd client && pnpm install
+      run: cd client && npm install
     
     - name: Build client
-      run: cd client && pnpm build
+      run: cd client && npm build
 
 
     - name: Create Release
