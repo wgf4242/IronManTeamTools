@@ -7,12 +7,12 @@ call pnpm build
 popd 
 
 
-Pushd %~dp0
-cd backend
-::copy * ..\client\dist\
-robocopy backend ..\client\dist\ /s /XD .idea /XD __pycache__
-echo %cd%
-popd
+::Pushd %~dp0
+::cd backend
+::::copy * ..\client\dist\
+::robocopy backend ..\client\dist\ /s /XD .idea /XD __pycache__
+::echo %cd%
+::popd
 
 
 echo release file in client\dist\

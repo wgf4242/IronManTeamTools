@@ -129,6 +129,14 @@ async def getInformation(info: Request):
     return req_info
 
 
+# 匹配全部路由 match history mode
+@app.get("/{rest_of_path:path}", response_class=HTMLResponse)
+async def read_item(request: Request, rest_of_path: str):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+
+
+
 # 最后加强它方便防止和前面冲突
 app.mount("/", StaticFiles(directory=".", html=True), name="static")
 

@@ -11,4 +11,4 @@
 3. 命令行执行 npm install -g pnpm
 4. 进入 client 目录 执行 pnpm install
 
-开发者build一键部署加启动
+build.bat: 开发者build一键部署加启动
