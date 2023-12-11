@@ -1,8 +1,8 @@
-name: Build Client
+name: Build Client and Create Release
 on:
   push:
     branches:
-      - dev  # 或者你希望触发操作的分支
+      - dev
 
 jobs:
   build:
@@ -23,12 +23,11 @@ jobs:
     - name: Build client
       run: cd client && npm build
 
-
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # 使用个人访问令牌替代 GITHUB_TOKEN
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
@@ -43,7 +42,7 @@ jobs:
     - name: Upload ZIP to Release
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # 使用个人访问令牌替代 GITHUB_TOKEN
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./dist.zip
