@@ -7,6 +7,7 @@ const router = createRouter({
     {path: '/', name: 'home', component: HomeView},
     {path: '/common', name: 'common', component: () => import('@/components/Temp.vue')},
     {path: '/aes', name: 'aes', component: () => import('@/components/Crypto_AES.vue')},
+    {path: '/lsb', name: 'lsb', component: () => import('@/components/ciphers/Crypto_LSB.vue')},
 
     {
       path: '/about',

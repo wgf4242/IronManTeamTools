@@ -12,9 +12,10 @@ import { RouterLink, RouterView } from 'vue-router'
         <li>
           <input type="text" placeholder="Search">
         </li>
-        <li class="item white">工具列表</li>
+        <li class="item bg-white">工具列表</li>
         <RouterLink to="/common">  <li class="item">常规解码</li></RouterLink>
         <RouterLink to="/aes"><li class="item">AES/DES/3DES/Rabbit</li></RouterLink>
+        <RouterLink to="/lsb"><li class="item">LSB</li></RouterLink>
         <li class="item"></li>
         <li class="item"></li>
       </ul>
@@ -23,7 +24,10 @@ import { RouterLink, RouterView } from 'vue-router'
 <!--      Tool2-->
 <!--    </div>-->
     <div id="right">
-      <RouterView />
+      <div class="right-container">
+        <RouterView />
+      </div>
+
     </div>
   </div>
 
@@ -78,6 +82,13 @@ body {
   /*background: #0a0;*/
   border: 1px solid #eee;
   /* height: 100vh;overflow: hidden; */
+  overflow: hidden;
+}
+#right > :first-child  {
+  max-height: 100vh;
+  height: 100%;
+  overflow: auto;
+
 }
 
 #left ul {

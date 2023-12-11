@@ -11,7 +11,8 @@ pip install fastapi base58 base45 bubblepy base91
 """
 
 from pathlib import Path
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form, File, UploadFile
+from typing import Annotated
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
@@ -48,10 +49,10 @@ async def root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.get("/get_wordlists", response_class=HTMLResponse)
+@app.get("/api/get_wordlists", response_class=HTMLResponse)
 async def get_wordlists():
-    lst = [file.name for file in Path('wordlists').rglob('*')]
-    return lst
+    lst = [file.name for file in Path('wordlists').rglob('*') if not file.name == '.gitignore']
+    return JSONResponse(lst)
 
 
 import Crypto_00_check as check
@@ -82,14 +83,39 @@ async def decrypt(request: Request):
     return JSONResponse(content=res)
 
 
-from Crypto_aes_CryptoJS import decrypt as aes_decrypt
+from cipher.Crypto_aes_CryptoJS import decrypt as aes_decrypt, decrypt_batch as aes_decrypt_batch
+
+from cipher.cloacked_pixel_lsb_bf import decrypt_batch as lsb_aes_decrypt_batch
 
 
-@app.post("/aes", response_class=HTMLResponse)
+async def login(enc: Annotated[str, Form()], file: Annotated[bytes, File()]):
+    return {"enc": enc, "file": file}
+
+
+# async def decrypt_lsb_aes(enc: Annotated[str, Form()], file: Annotated[bytes, File()]):
+@app.post("/api/lsb_aes", response_class=HTMLResponse)
+async def decrypt_lsb_aes(wordlist: Annotated[str, Form()], file: UploadFile = File(...)):
+    # r = await request.body()
+    # enc = r.get('enc', '').encode()
+    # key = r.get('key', '').encode()
+    content = await file.read()
+    res = lsb_aes_decrypt_batch(content, 'wordlists/' + wordlist)
+    return res
+
+
+@app.post("/api/aes", response_class=HTMLResponse)
 async def decrypt_aes(request: Request):
     r = await request.json()
-    enc = r.get('enc').encode()
-    key = r.get('key').encode()
+    enc = r.get('enc', '').encode()
+    key = r.get('key', '').encode()
+    file = r.get('file', '')
+
+    if file:  # 批量爆破
+        res = aes_decrypt_batch(enc, file)
+        if not res:
+            return '失败'
+        return res
+
     res = aes_decrypt(enc, key)
     if not res:
         return '失败'

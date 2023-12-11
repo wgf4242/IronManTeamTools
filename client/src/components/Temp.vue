@@ -1,5 +1,4 @@
 <template>
-  <div id="app">
     <div>
       <input v-model="enc" @keyup="submit" @change="submit">
     </div>
@@ -10,7 +9,6 @@
         <td>{{ v }}</td>
       </tr>
     </table>
-  </div>
 </template>
 
 <script>

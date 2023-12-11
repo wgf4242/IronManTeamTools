@@ -23,10 +23,14 @@
   filter: brightness(98%);
 }
 
-.white {
+.bg-white {
   background: white;
 }
 
 .mt30{
   margin-top: 30px;
+}
+
+.red {
+  color: red;;
 }
