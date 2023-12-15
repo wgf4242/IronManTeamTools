@@ -1,0 +1,12 @@
+fastapi
+base45
+base58
+bubblepy
+base91
+pybase100
+jinja2
+pycryptodome
+opencv-python
+python-multipart
+uvicorn
+wordninja
