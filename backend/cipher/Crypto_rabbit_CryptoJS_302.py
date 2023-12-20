@@ -5,7 +5,7 @@ from hashlib import md5
 import base64
 import struct
 
-from cipher.utils import count_not_printable
+from cipher.utils import count_not_printable, longest_continuous_printable
 
 ROTL = lambda x, n: ((x << n) & 0xffffffff) | ((x >> (32 - n)) & 0xffffffff)
 
@@ -220,6 +220,7 @@ def decrypt_batch(data, file):
     assert data[:8] == b'Salted__'
     salt = data[8:16]
 
+    lst = []
     with open(f'wordlists/{file}') as f:
         words = f.read().splitlines()
         for passphrase in words:
@@ -230,8 +231,11 @@ def decrypt_batch(data, file):
 
             cipher = Rabbit(key, iv)
             plainbyte = cipher.decrypt(data[16:])
-            if plainbyte and count_not_printable(plainbyte) < 8:
-                return plainbyte + b'  , key: ' + passphrase
+            if plainbyte and longest_continuous_printable(plainbyte) > 5 and count_not_printable(plainbyte) < 8:
+                tmp = plainbyte + b'  , key: ' + passphrase
+                return tmp
+                # lst.append(tmp)
+        # return b'\n'.join(lst)
     return ''
 
 

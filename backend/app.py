@@ -128,7 +128,7 @@ async def decrypt_aes(request: Request):
         res = dic[alg](enc, file)
         if not res:
             return '失败'
-        return res
+        return str(res)
 
     dic = {"AES": aes_decrypt, "DES": des_decrypt, "RABBIT": rabbit_decrypt}
     res = dic[alg](enc, key)
