@@ -1,3 +1,4 @@
+import re
 import string
 
 
@@ -20,5 +21,17 @@ def longest_continuous_printable(text):
         longest_seq = current_seq
 
     return len(longest_seq)
-def count_not_printable(text:bytes):
+
+
+def count_not_printable(text: bytes):
     return sum(1 for x in text if chr(x) not in string.printable)
+
+
+def clean(text: bytes):
+    text1 = re.sub(b'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\xff]+$', b'', text)
+    text2 = str(text1)[2:-1]
+    return text2
+
+
+def printable(text):
+    return count_not_printable(text) < 1

@@ -42,7 +42,7 @@
 
 <script>
 import {ref, onMounted} from "vue";
-import {decryptAes, decryptLSBAes, getWordlists} from '@/api'
+import {decryptAes, decryptLSBAes, getWordlists} from '@/api/index.js'
 
 export default {
   name: "Crypto_AES",

@@ -4,6 +4,9 @@ from hashlib import md5
 
 from Crypto.Cipher import AES
 from Crypto import Random
+from Crypto.Util.Padding import unpad as pkcs7unpad
+
+from cipher.utils import clean, printable
 
 
 def pad(s):
@@ -11,7 +14,7 @@ def pad(s):
 
 
 def unpad(s):
-    return s[0:-ord(s[len(s) - 1:])]
+    return pkcs7unpad(s, 16)
 
 
 def bytes_to_key(data, salt, output=48):
@@ -44,7 +47,8 @@ def decrypt(data, passphrase):
     iv = key_iv[32:]
     aes = AES.new(key, AES.MODE_CBC, iv)
     plainbyte = unpad(aes.decrypt(data[16:]))
-    return plainbyte
+    plain = clean(plainbyte)
+    return plain
 
 
 def decrypt_batch(data, file):
@@ -62,9 +66,12 @@ def decrypt_batch(data, file):
             iv = key_iv[32:]
 
             aes = AES.new(key, AES.MODE_CBC, iv)
-            plainbyte = unpad(aes.decrypt(data[16:]))
-            if plainbyte and  longest_continuous_printable(plainbyte) >= 8:
-                return plainbyte + b'  , key: ' + passphrase
+            try:
+                plainbyte = unpad(aes.decrypt(data[16:]))
+                if plainbyte and printable(plainbyte):
+                    return clean(plainbyte) + ', key: ' + passphrase.decode()
+            except:
+                ...
     return ''
 
 

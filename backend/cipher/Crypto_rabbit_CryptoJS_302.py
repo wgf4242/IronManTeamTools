@@ -4,8 +4,9 @@
 from hashlib import md5
 import base64
 import struct
+from Crypto.Util.Padding import unpad as pkcs7unpad
 
-from cipher.utils import count_not_printable, longest_continuous_printable
+from cipher.utils import count_not_printable, longest_continuous_printable, clean, printable
 
 ROTL = lambda x, n: ((x << n) & 0xffffffff) | ((x >> (32 - n)) & 0xffffffff)
 
@@ -15,7 +16,7 @@ def pad(s):
 
 
 def unpad(s):
-    return s[0:-ord(s[len(s) - 1:])]
+    return pkcs7unpad(s, 16)
 
 
 def ROTL8(v, n):
@@ -231,9 +232,11 @@ def decrypt_batch(data, file):
 
             cipher = Rabbit(key, iv)
             plainbyte = cipher.decrypt(data[16:])
-            if plainbyte and longest_continuous_printable(plainbyte) > 5 and count_not_printable(plainbyte) < 8:
-                tmp = plainbyte + b'  , key: ' + passphrase
-                return tmp
+            if plainbyte and printable(plainbyte):
+                return clean(plainbyte) + ', key: ' + passphrase.decode()
+            # if plainbyte and longest_continuous_printable(plainbyte) > 5 and count_not_printable(plainbyte) < 8:
+            #     tmp = plainbyte + b'  , key: ' + passphrase
+            #     return tmp
                 # lst.append(tmp)
         # return b'\n'.join(lst)
     return ''

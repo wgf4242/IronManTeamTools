@@ -31,7 +31,7 @@
 
 <script>
 import {ref, onMounted, reactive} from "vue";
-import {decryptAes, getWordlists} from '@/api'
+import {decryptAes, getWordlists} from '@/api/index.js'
 
 export default {
   name: "Crypto_AES",
