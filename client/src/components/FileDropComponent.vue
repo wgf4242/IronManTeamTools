@@ -13,7 +13,7 @@ import {ref} from "vue";
 
 export default {
   name: "FileDropComponent",
-  emits: ['change'],
+  emits: ['change', 'changeObj'],
   setup(props, ctx) {
     const fileObj = ref(null);
 
@@ -28,6 +28,7 @@ export default {
         reader.onload = (e) => {
           const fileContent = e.target.result;
           ctx.emit('change', fileContent);
+          ctx.emit('changeObj', fileObj.value);
         };
         reader.readAsText(file);
       }

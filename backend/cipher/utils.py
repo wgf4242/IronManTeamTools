@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 import string
 
 
@@ -35,3 +36,21 @@ def clean(text: bytes):
 
 def printable(text):
     return count_not_printable(text) < 1
+
+
+def get_datetime():
+    now = datetime.now()
+
+    year = now.strftime("%Y")  # 4位年份
+    month = now.strftime("%m")  # 2位月份
+    day = now.strftime("%d")  # 2位日期
+    hour = now.strftime("%H")  # 2位小时
+    minute = now.strftime("%M")  # 2位分钟
+    second = now.strftime("%S")  # 2位秒钟
+
+    date_string = f"{year}{month}{day}"
+    time_string = f"{hour}{minute}{second}"
+
+    return f'{date_string}{time_string}'
+
+

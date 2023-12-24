@@ -61,9 +61,18 @@ def decrypt_batch(data, file):
             iv = key_iv[8:16]
 
             cipher = DES.new(key, DES.MODE_CBC, iv)
-            plainbyte = unpad(cipher.decrypt(data[16:]))
-            if plainbyte and printable(plainbyte):
-                return clean(plainbyte) + ', key: ' + passphrase.decode()
+            # try:
+            #     plainbyte = unpad(aes.decrypt(data[16:]))
+            #     if plainbyte and printable(plainbyte):
+            #         return clean(plainbyte) + ', key: ' + passphrase.decode()
+            # except:
+            #     ...
+            try:
+                plainbyte = unpad(cipher.decrypt(data[16:]))
+                if plainbyte and printable(plainbyte):
+                    return clean(plainbyte) + ', key: ' + passphrase.decode()
+            except:
+                ...
     return ''
 
 

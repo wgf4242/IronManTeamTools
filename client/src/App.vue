@@ -19,6 +19,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/frequency"><li class="item">词频统计</li></RouterLink>
         <RouterLink to="/coordinate"><li class="item">Draw Coordinate</li></RouterLink>
         <RouterLink to="/binary"><li class="item">Binary fuzz</li></RouterLink>
+        <RouterLink to="/reverse_file"><li class="item">文件逆序</li></RouterLink>
         <li class="item"></li>
         <li class="item"></li>
       </ul>

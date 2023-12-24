@@ -11,6 +11,7 @@ const router = createRouter({
     {path: '/lsb', name: 'lsb', component: () => import('@/views/ciphers/Crypto_LSB.vue')},
     {path: '/frequency', name: 'frequency', component: () => import('@/views/ciphers/Frequency.vue')},
     {path: '/binary', name: 'binary', component: () => import('@/views/ciphers/CryptoBinary.vue')},
+    {path: '/reverse_file', name: 'reverse_file', component: () => import('@/views/ciphers/ReverseFile.vue')},
 
     {
       path: '/about',

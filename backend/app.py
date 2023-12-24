@@ -9,21 +9,24 @@ crypto_00_check_gui.py
 @ requirements
 pip install fastapi base58 base45 bubblepy base91
 """
-
+import os
+from io import BytesIO
 from pathlib import Path
 from typing import Annotated
 
 from fastapi import FastAPI, Request, Form, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from cipher.Crypto_aes_CryptoJS import decrypt as aes_decrypt, decrypt_batch as aes_decrypt_batch
 from cipher.Crypto_des_CryptoJS import decrypt as des_decrypt, decrypt_batch as des_decrypt_batch
 from cipher.Crypto_rabbit_CryptoJS_302 import decrypt as rabbit_decrypt, decrypt_batch as rabbit_decrypt_batch
+from cipher.Misc_Reverse_file import cipher_test_split_byte_l4_h4_swap_file
 from cipher.cloacked_pixel_lsb_bf import decrypt_batch as lsb_aes_decrypt_batch
 from cipher.misc_word_frequency02_word import word_count, char_count
+from cipher.utils import get_datetime
 
 app = FastAPI()
 origins = ["*"]
@@ -112,6 +115,36 @@ async def decrypt_lsb_aes(wordlist: Annotated[str, Form()], file: UploadFile = F
     content = await file.read()
     res = lsb_aes_decrypt_batch(content, 'wordlists/' + wordlist)
     return res
+
+@app.post("/api/reverse_file", response_class=HTMLResponse)
+async def reverse_file(file: UploadFile = File(...)):
+    content = await file.read()
+
+    folder_name = get_datetime()
+    folder = 'tmp/' + folder_name
+    path = Path(folder)
+    if not path.exists():
+        path.mkdir()
+
+
+    cipher_test_split_byte_l4_h4_swap_file(content, str(path.absolute()))
+    os.system('explorer ' + str(path.absolute()))
+    return ''
+
+
+@app.post("/api/download_file", response_class=HTMLResponse)
+async def download_file(file: UploadFile = File(...)):
+    content = await file.read()
+    print(...)
+    file_content = b"Hello, world!"  # 文件内容
+
+    # 创建一个BytesIO对象，将文件内容写入其中
+    file_object = BytesIO()
+    file_object.write(file_content)
+    file_object.seek(0)  # 将文件指针重置到文件开头
+
+    # 返回StreamingResponse作为响应，将内存中的文件内容流式传输给客户端
+    return StreamingResponse(file_object, headers={'Content-Disposition': 'attachment; filename="yourfilename.zip"'})
 
 
 @app.post("/api/aes", response_class=HTMLResponse)
