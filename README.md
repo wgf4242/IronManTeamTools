@@ -20,6 +20,8 @@ build.bat: 开发者build一键部署加启动
 
 # TODO List
 
+* binary fuzz 前面补0及后面补0
+* encode , rot bruteforce
 * 爆破进度条
 * img
   * FixPNG
