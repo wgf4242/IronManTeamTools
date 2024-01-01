@@ -63,12 +63,12 @@ def base64_d(txt):
     return r
 
 
-
 @dec
 def base64_d_rev(txt):
     r = base64.b64decode(txt[::-1] + b'=====')
     print('base64 is \t\t' + r.decode('utf8', errors='ignore'))
     return r
+
 
 @dec
 def base64_en(txt):
@@ -143,6 +143,17 @@ def rot13_d(txt):
 
 
 @dec
+def rot13_bf_d(txt):
+    from cipher.rot_13_bruteforce import rot13_decrypt
+
+    lst = []
+    for i in range(26):
+        res = rot13_decrypt(txt.decode(), i)
+        lst.append(res)
+    return '\n'.join(lst)
+
+
+@dec
 def rot47_d(txt):
     s = txt.decode()
     x = []
@@ -182,7 +193,6 @@ def xxencode_d(txt):
 def base91_d(txt):
     import base91
     return base91.decode(txt.decode('utf8')).decode('utf8')
-
 
 
 @dec
@@ -263,6 +273,7 @@ def base92_d(txt):
         return resstr
 
     return base92_decode(txt.decode())
+
 
 @dec
 def base100_d(txt):

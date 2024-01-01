@@ -27,6 +27,7 @@ build.bat: 开发者build一键部署加启动
   * FixPNG
   * mang shui yin 2,3
   * pin yu mang shui 2,3 
+* r fences bruteforce
   
 * √ 文件逆序
 * √ 判断2种字符  字符替换成0 1 ，2种替换。转binary, 提示morse 培根等

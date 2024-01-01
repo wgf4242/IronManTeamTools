@@ -1,6 +1,0 @@
-fastapi
-base45
-base58
-bubblepy
-base91
-pybase100
