@@ -25,8 +25,9 @@ build.bat: 开发者build一键部署加启动
 * 爆破进度条
 * img
   * FixPNG
-  * mang shui yin 2,3
+  * 盲水印 2,3
   * pin yu mang shui 2,3 
+  * PNG IDAT检测
 * r fences bruteforce
 * 3种 ook
 * crc32 爆破
