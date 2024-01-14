@@ -9,13 +9,14 @@ from Crypto.Util.Padding import unpad as pkcs7unpad
 
 from cipher.utils import clean, printable
 
+BLOCK_SIZE = 8
 
 def pad(s):
     return s + (16 - len(s) % 16) * chr(16 - len(s) % 16).encode()
 
 
 def unpad(s):
-    return pkcs7unpad(s, 16)
+    return pkcs7unpad(s, BLOCK_SIZE)
 
 
 # def unpad(s):
@@ -52,10 +53,9 @@ def decrypt_batch(data, file):
     assert data[:8] == b'Salted__'
     salt = data[8:16]
 
-    with open(f'wordlists/{file}') as f:
+    with open(f'wordlists/{file}', 'rb') as f:
         words = f.read().splitlines()
         for passphrase in words:
-            passphrase = passphrase.encode()
             key_iv = bytes_to_key(passphrase, salt, 32 + 16)
             key = key_iv[:8]
             iv = key_iv[8:16]
@@ -80,5 +80,5 @@ if __name__ == '__main__':
     # wordArray = DES.decrypt('U2FsdGVkX1+/hEfItB2ChgHRgcG5Uz0acYzT3mYjA67ZW8XCoAJ96Q==', '12345678');
 
     decrypt_data = decrypt(b'U2FsdGVkX1+/hEfItB2ChgHRgcG5Uz0acYzT3mYjA67ZW8XCoAJ96Q==', b'12345678')
-    assert decrypt_data == b'1234567812345678'
+    assert decrypt_data == '1234567812345678'
 

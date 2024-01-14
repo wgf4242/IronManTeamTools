@@ -222,10 +222,9 @@ def decrypt_batch(data, file):
     salt = data[8:16]
 
     lst = []
-    with open(f'wordlists/{file}') as f:
+    with open(f'wordlists/{file}', 'rb') as f:
         words = f.read().splitlines()
         for passphrase in words:
-            passphrase = passphrase.encode()
             key_iv = bytes_to_key(passphrase, salt, 32 + 16)
             key = key_iv[:16]
             iv = key_iv[16:16 + 8]

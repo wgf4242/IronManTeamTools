@@ -23,6 +23,7 @@ from fastapi.templating import Jinja2Templates
 from cipher.Crypto_aes_CryptoJS import decrypt as aes_decrypt, decrypt_batch as aes_decrypt_batch
 from cipher.Crypto_des_CryptoJS import decrypt as des_decrypt, decrypt_batch as des_decrypt_batch
 from cipher.Crypto_rabbit_CryptoJS_302 import decrypt as rabbit_decrypt, decrypt_batch as rabbit_decrypt_batch
+from cipher.Crypto_rc4_CryptoJS import decrypt as rc4_decrypt, decrypt_batch as rc4_decrypt_batch
 from cipher.Misc_Reverse_file import cipher_test_split_byte_l4_h4_swap_file
 from cipher.cloacked_pixel_lsb_bf import decrypt_batch as lsb_aes_decrypt_batch
 from cipher.misc_word_frequency02_word import word_count, char_count
@@ -116,6 +117,7 @@ async def decrypt_lsb_aes(wordlist: Annotated[str, Form()], file: UploadFile = F
     res = lsb_aes_decrypt_batch(content, 'wordlists/' + wordlist)
     return res
 
+
 @app.post("/api/reverse_file", response_class=HTMLResponse)
 async def reverse_file(file: UploadFile = File(...)):
     content = await file.read()
@@ -125,7 +127,6 @@ async def reverse_file(file: UploadFile = File(...)):
     path = Path(folder)
     if not path.exists():
         path.mkdir()
-
 
     cipher_test_split_byte_l4_h4_swap_file(content, str(path.absolute()))
     os.system('explorer ' + str(path.absolute()))
@@ -156,14 +157,14 @@ async def decrypt_aes(request: Request):
     alg = r.get('alg', '')
 
     if file:  # 批量爆破
-        dic = {"AES": aes_decrypt_batch, "DES": des_decrypt_batch, "RABBIT": rabbit_decrypt_batch}
+        dic = {"AES": aes_decrypt_batch, "DES": des_decrypt_batch, "RABBIT": rabbit_decrypt_batch, "RC4": rc4_decrypt_batch}
 
         res = dic[alg](enc, file)
         if not res:
             return '失败'
         return str(res)
 
-    dic = {"AES": aes_decrypt, "DES": des_decrypt, "RABBIT": rabbit_decrypt}
+    dic = {"AES": aes_decrypt, "DES": des_decrypt, "RABBIT": rabbit_decrypt, "RC4": rc4_decrypt}
     res = dic[alg](enc, key)
     if not res:
         return '失败'

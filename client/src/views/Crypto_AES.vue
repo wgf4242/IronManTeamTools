@@ -5,7 +5,7 @@
   <input v-model="iv" type="text" placeholder="IV">
 
   <table>
-    <tr v-for="alg in ['AES','DES', 'RABBIT']" :key="alg">
+    <tr v-for="alg in ['AES','DES', 'RABBIT', 'RC4']" :key="alg">
       <td><button @click="submit(alg)">Decrypt</button></td>
       <td>{{ alg }}:</td>
       <td>{{ plains?.[alg] }}</td>
@@ -15,7 +15,7 @@
   <div class="mt30">字典爆破: 字典放到: wordlists 下</div>
 
   <table class="content">
-    <tr v-for="alg in ['AES','DES', 'RABBIT']" :key="alg">
+    <tr v-for="alg in ['AES','DES', 'RABBIT', 'RC4']" :key="alg">
       <td>{{ alg }}:</td>
       <td>选择字典<select v-model="select">
         <option v-for="item in wordlists" :key="item">{{ item }}</option>
