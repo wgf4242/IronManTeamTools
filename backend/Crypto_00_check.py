@@ -282,6 +282,16 @@ def base100_d(txt):
 
 
 @dec
+def rail_fences_d(txt):
+    from cipher.Crypto_railFence import decryptRailFence
+    lst = []
+    for i in range(1, 10):
+        r = decryptRailFence(txt.decode(), i, 0)
+        lst.append(r)
+    return '\n'.join(lst)
+
+
+@dec
 def z_caesar_box_d(txt):
     from itertools import zip_longest
     def caesar_box_cipher(data, n):
