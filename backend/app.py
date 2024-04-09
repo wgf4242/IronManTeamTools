@@ -29,6 +29,10 @@ from cipher.cloacked_pixel_lsb_bf import decrypt_batch as lsb_aes_decrypt_batch
 from cipher.misc_word_frequency02_word import word_count, char_count
 from cipher.utils import get_datetime
 
+import mimetypes
+
+custom_mimetype = mimetypes.add_type("application/javascript", ".js", True)
+
 app = FastAPI()
 origins = ["*"]
 
@@ -60,7 +64,8 @@ async def redirect_to_static():
 
 @app.get("/main")
 async def static_endpoint(request: Request):
-    return templates.TemplateResponse("static/index.html", {"request": request})
+    # return templates.TemplateResponse("static/index.html", {"request": request})
+    return templates.TemplateResponse("static/index.html", {"request": request}, mimetypes=custom_mimetype)
 
 
 @app.get("/main/{rest_of_path:path}", response_class=HTMLResponse)
