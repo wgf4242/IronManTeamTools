@@ -4,7 +4,8 @@ import HomeView from '../views/HomeView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {path: '/', name: 'home', component: HomeView},
+    // {path: '/', name: 'home', component: HomeView},
+    { path: '/', redirect: '/common' },
     {path: '/common', name: 'common', component: () => import('@/views/Temp.vue')},
     {path: '/aes', name: 'aes', component: () => import('@/views/Crypto_AES.vue')},
     {path: '/coordinate', name: 'coordinate', component: () => import('@/views/Coordinate.vue')},

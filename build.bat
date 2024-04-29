@@ -6,6 +6,8 @@ echo %cd%
 call pnpm build
 popd 
 
+reg delete HKEY_CLASSES_ROOT\.js /v "Content Type" /f
+reg delete HKEY_CLASSES_ROOT\.js /v PerceivedType /f
 
 ::Pushd %~dp0
 ::cd backend

@@ -19,7 +19,7 @@ def dec(func):
             if isinstance(res, bytes):
                 return res.decode('utf8', errors='ignore')
             return res
-        except:
+        except Exception as e:
             r = f'---- {func.__name__} failed ----'
             print(r)
             return r
@@ -183,10 +183,19 @@ def base62_d(txt):
 
 
 @dec
+def base2048_d(txt):
+    import os
+    stdout = os.popen(f"node cipher\\Crypto_base2048.js {txt.decode()}").read()  # 执行并输出命令的执行结果
+    return stdout.strip('\n')
+
+
+@dec
 def xxencode_d(txt):
     import os
-    stdout = os.popen(f'''node -e "const xxencode = require('./Crypto_xxencode');console.log(xxencode.decode('{txt.decode()}'))"''').read()  # 执行并输出命令的执行结果
-    return stdout.strip('\n')
+    txt = txt.replace(b'\n', b'\\n')
+    stdout = os.popen(f'''node -e "const xxencode = require('./Crypto_xxencode');console.log(xxencode.decode('{txt.decode()}'))"''')
+    msg = stdout.buffer.read().decode('utf-8')
+    return msg.strip('\n')
 
 
 @dec

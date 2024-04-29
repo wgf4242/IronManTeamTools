@@ -1,6 +1,7 @@
 <template>
   <div>
-    <input v-model="enc" @keyup="submit" @change="submit">
+    <!--<input v-model="enc" @keyup="submit" @change="submit">-->
+    <textarea v-model="enc" @keyup="submit" @change="submit" style="width: 500px;"/>
   </div>
   <button @click="submit">Decrypt</button>
   <table>

@@ -89,7 +89,7 @@ async def read_item(request: Request):
 
 # 排除列表后, 每个函数执行输入返回输出
 def get_list(r):
-    exclude = ['dec', 'base64', 'unittest']
+    exclude = ['_pydev_stop_at_break', 'dec', 'base64', 'unittest']
     lst = [x for x in dir(check) if not str(x).startswith('__') and x not in exclude]
     d = {}
     # import inspect
