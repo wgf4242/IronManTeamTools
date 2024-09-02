@@ -57,6 +57,13 @@ def atbash_d(txt):
 
 
 @dec
+def a01_swapcase(txt: bytes):
+    if not isinstance(txt, str):
+        txt = txt.decode()
+    return txt.swapcase()
+
+
+@dec
 def base64_d(txt):
     r = base64.b64decode(txt)
     print('base64 is \t\t' + r.decode('utf8', errors='ignore'))
