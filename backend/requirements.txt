@@ -10,3 +10,6 @@ opencv-python
 python-multipart
 uvicorn
 wordninja
+requests-html
+lxml_html_clean
+ddddocr

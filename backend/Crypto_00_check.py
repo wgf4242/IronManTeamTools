@@ -321,6 +321,18 @@ def z_caesar_box_d(txt):
     return '\n'.join(res)
 
 
+@dec
+def z_md5(md5):
+    md5 = md5.strip()
+    if isinstance(md5, bytes):
+        md5 = md5.decode()
+    if len(md5) != 32:
+        return "长度不对"
+    from cipher.req_cmd5 import req_md5
+    return req_md5(md5)
+
+
+
 class __Test(unittest.TestCase):
     def test_base85(self):
         self.assertEqual(base85_d(b'Ao(mgHY?i2ARAkQB5_^!?Y!Sj0ms'), 'flag{have_a_good_day1}')
