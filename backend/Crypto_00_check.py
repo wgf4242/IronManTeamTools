@@ -322,7 +322,7 @@ def z_caesar_box_d(txt):
 
 
 @dec
-def z_md5(md5):
+def z_090_md5(md5):
     md5 = md5.strip()
     if isinstance(md5, bytes):
         md5 = md5.decode()
@@ -330,6 +330,11 @@ def z_md5(md5):
         return "长度不对"
     from cipher.req_cmd5 import req_md5
     return req_md5(md5)
+
+@dec
+def z_100_brainfuck(data):
+    from cipher.brainfuck_test import evaluate as brainfuck
+    return brainfuck(data.decode())
 
 
 
