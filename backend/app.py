@@ -64,8 +64,8 @@ async def redirect_to_static():
 
 @app.get("/main")
 async def static_endpoint(request: Request):
-    # return templates.TemplateResponse("static/index.html", {"request": request})
-    return templates.TemplateResponse("static/index.html", {"request": request}, mimetypes=custom_mimetype)
+    return templates.TemplateResponse("static/index.html", {"request": request})
+    # return templates.TemplateResponse("static/index.html", {"request": request}, mimetypes=custom_mimetype)
 
 
 @app.get("/main/{rest_of_path:path}", response_class=HTMLResponse)

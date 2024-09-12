@@ -182,10 +182,17 @@ def rot18_d(txt):
     return txt.decode().translate(ROT18)
 
 
+def __clean(txt):
+    if isinstance(txt, bytes):
+        txt = txt.decode()
+        txt = txt.replace(' ', '').replace('\n', '').strip('\n').strip()
+    return txt
+
 @dec
 def base62_d(txt):
     import os
-    stdout = os.popen(f"node Crypto_base62.js {txt.decode()}").read()  # 执行并输出命令的执行结果
+    txt1 = __clean(txt)
+    stdout = os.popen(f"node Crypto_base62.cjs {txt1}").read()  # 执行并输出命令的执行结果
     return stdout.strip('\n')
 
 

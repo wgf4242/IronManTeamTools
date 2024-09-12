@@ -15,6 +15,7 @@ backend/media/
 backend/assets/
 backend/images/
 backend/venv/
+venv
 
 # Windows
 [Dd]esktop.ini
