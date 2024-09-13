@@ -65,6 +65,7 @@ async def redirect_to_static():
 @app.get("/main")
 async def static_endpoint(request: Request):
     return templates.TemplateResponse("static/index.html", {"request": request})
+    # 旧的版本才支持 mimetype 参数
     # return templates.TemplateResponse("static/index.html", {"request": request}, mimetypes=custom_mimetype)
 
 
