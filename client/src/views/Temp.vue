@@ -42,7 +42,13 @@ export default {
     }
 
     const submit = () => {
-      let rail_fence_M_d_Value = getRailFenceM(enc.value);
+      let rail_fence_M_d_Value;
+      try {
+        rail_fence_M_d_Value = getRailFenceM(enc.value)
+      } catch (e){
+        rail_fence_M_d_Value = "";
+      }
+
 
       fetch('http://127.0.0.1:8000/test', {
         method: 'POST',

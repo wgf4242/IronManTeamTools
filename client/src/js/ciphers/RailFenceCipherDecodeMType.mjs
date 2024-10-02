@@ -1,3 +1,16 @@
+class OperationError extends Error {
+    constructor(message) {
+        // 调用父类的构造函数，并传递错误信息给它
+        super(message);
+
+        // 设置错误的名称，这可以用来区分不同类型的错误
+        this.name = "OperationError";
+
+        // 可选：如果需要，可以在这里设置其他属性或方法
+    }
+}
+
+
 class RailFenceCipherTypeMDecode {
 
     run(input, args) {
