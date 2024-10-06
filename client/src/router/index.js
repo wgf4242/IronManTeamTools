@@ -13,6 +13,7 @@ const router = createRouter({
     {path: '/frequency', name: 'frequency', component: () => import('@/views/ciphers/Frequency.vue')},
     {path: '/binary', name: 'binary', component: () => import('@/views/ciphers/CryptoBinary.vue')},
     {path: '/reverse_file', name: 'reverse_file', component: () => import('@/views/ciphers/ReverseFile.vue')},
+    {path: '/url_component', name: 'url_component', component: () => import('@/views/web/URLComponent.vue')},
 
     {
       path: '/about',
