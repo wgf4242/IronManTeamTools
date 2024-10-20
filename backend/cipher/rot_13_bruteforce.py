@@ -7,9 +7,10 @@ def rot13_decrypt(txt, rot_num=13):
         elif ord('a') <= och <= ord('z'):
             och = (och - ord('a') + rot_num) % 26 + ord('a')
         elif ord('A') <= och <= ord('Z'):
-            och = (och - ord('a') + rot_num) % 26 + ord('A')
+            och = (och - ord('A') + rot_num) % 26 + ord('A')
         lst.append(chr(och))
     return ''.join(lst)
 
 
-print(rot13_decrypt('123'))
+if __name__ == '__main__':
+    print(rot13_decrypt('123'))

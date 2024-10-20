@@ -344,6 +344,11 @@ def z_100_brainfuck(data):
     return brainfuck(data.decode())
 
 
+@dec
+def a02_transtable(txt):
+    from cipher.Crypto_trans_table import main as a00_trans_table
+    return ea00_trans_table(txt.decode())
+
 
 class __Test(unittest.TestCase):
     def test_base85(self):
