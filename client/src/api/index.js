@@ -1,3 +1,13 @@
+async function decryptLSB(data) {
+    const requestOptions = {
+        method: 'POST',
+        body: data
+    };
+
+    let response = await fetch('/api/lsb', requestOptions);
+    return response.text();
+}
+
 async function getWordlists() {
     let response = await fetch('/api/get_wordlists');
     let txt = await response.json();
@@ -62,4 +72,4 @@ async function decryptAes(data) {
     return response.text();
 }
 
-export {getWordlists, decryptAes, decryptLSBAes, WordFrequecy, reverse_file}
+export {getWordlists, decryptAes, decryptLSBAes, WordFrequecy, reverse_file, decryptLSB}

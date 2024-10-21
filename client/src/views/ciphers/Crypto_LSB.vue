@@ -1,5 +1,5 @@
 <template>
-  <h1>LSB-cloacked-pixel</h1>
+  <h1>LSB</h1>
 
   <div id="dropZone"
        @dragover.prevent
@@ -11,10 +11,12 @@
 <!--  <p><button @click="submit">Decrypt</button></p>-->
 
   <table>
+    <tbody>
     <tr>
       <td>LSB-cloacked-pixel</td>
       <td>{{ plain }}</td>
     </tr>
+    </tbody>
   </table>
 
   <div class="mt30">字典爆破
@@ -22,6 +24,7 @@
   </div>
 
   <table>
+    <tbody>
     <tr>
       <td>clock_pixel_lsb:</td>
       <td>选择字典
@@ -32,17 +35,22 @@
       <td>
         <button @click="submitBatch">开始爆破</button>
       </td>
-      <td>
-        <pre>{{clock_pixel_lsb}}</pre>
-      </td>
+      <td><pre>{{ clock_pixel_lsb }}</pre></td>
     </tr>
+    <tr>
+      <td><button @click="btnLSB">LSB 隐写</button></td>
+    </tr>
+    <tr>
+      <td><pre>{{data_lsb}}</pre></td>
+    </tr>
+    </tbody>
   </table>
 
 </template>
 
 <script>
 import {ref, onMounted} from "vue";
-import {decryptAes, decryptLSBAes, getWordlists} from '@/api/index.js'
+import {decryptAes, decryptLSBAes, getWordlists, decryptLSB} from '@/api/index.js'
 
 export default {
   name: "Crypto_AES",
@@ -63,6 +71,14 @@ export default {
     })
 
 
+    const data_lsb = ref('')
+    const btnLSB = () => {
+      const formData = new FormData();
+      formData.append('file', fileObj.value);
+      decryptLSB(formData).then(r => {
+        data_lsb.value = r
+      })
+    }
     const submitBatch = () => {
 
       const formData = new FormData();
@@ -112,6 +128,7 @@ export default {
       handleDrop,
       fileObj,
       clock_pixel_lsb,
+      btnLSB,data_lsb
     }
   }
 }

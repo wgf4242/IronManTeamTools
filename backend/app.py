@@ -27,6 +27,7 @@ from cipher.Crypto_rc4_CryptoJS import decrypt as rc4_decrypt, decrypt_batch as 
 from cipher.Misc_Reverse_file import cipher_test_split_byte_l4_h4_swap_file
 from cipher.cloacked_pixel_lsb_bf import decrypt_batch as lsb_aes_decrypt_batch
 from cipher.misc_word_frequency02_word import word_count, char_count
+from cipher.misc_lsb import lsb_decrypt
 from cipher.utils import get_datetime
 
 import mimetypes
@@ -122,6 +123,11 @@ async def decrypt_lsb_aes(wordlist: Annotated[str, Form()], file: UploadFile = F
     content = await file.read()
     res = lsb_aes_decrypt_batch(content, 'wordlists/' + wordlist)
     return res
+
+@app.post("/api/lsb", response_class=HTMLResponse)
+async def decrypt_lsb(file: UploadFile = File(...)):
+    content = await file.read()
+    return lsb_decrypt(content).decode('utf-8', 'ignore')
 
 
 @app.post("/api/reverse_file", response_class=HTMLResponse)
