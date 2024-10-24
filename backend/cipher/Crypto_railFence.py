@@ -8,6 +8,33 @@ def offset(even, rails, rail):
         return 2 * (rails - 1 - rail)
 
 
+def encryptRailFence(text, key):
+    rail = [['\n' for i in range(len(text))]
+            for j in range(key)]
+
+    dir_down = False
+    row, col = 0, 0
+
+    for i in range(len(text)):
+
+        if (row == 0) or (row == key - 1):
+            dir_down = not dir_down
+
+        rail[row][col] = text[i]
+        col += 1
+
+        if dir_down:
+            row += 1
+        else:
+            row -= 1
+
+    result = []
+    for i in range(key):
+        for j in range(len(text)):
+            if rail[i][j] != '\n':
+                result.append(rail[i][j])
+    return ("".join(result))
+
 def decryptRailFence(encrypted, rails, showOff=0):
     array = [[" " for col in range(len(encrypted))] for row in range(rails)]
     read = 0
@@ -53,3 +80,9 @@ if __name__ == '__main__':
     assert decryptRailFence("WECRLTEERDSOEEFEAOCAIVDEN", 3, 0) == "WEAREDISCOVEREDFLEEATONCE"
     assert decryptRailFence("f{52bgb-281lg00ff-46f7-ca009c8e}a381-b7191", 3, 0) == "flag{0305f8f2-14b6-fg7b-bc7a-010299c881e1}"
     assert decryptRailFence("WWHLIAATTEHSDITETH", 7, 0) == "WHATSTHEDEALWITHIT"
+
+    assert encryptRailFence("kanbbrgghjl{zb____}vtlaln", 7) == "kzna{blnl_abj_lbh_trg_vg}"
+    text = 'kanbbrgghjl{zb____}vtlaln'
+    # for i in range(2, 10):
+    #     print(encryptRailFence(text, i))
+

@@ -305,10 +305,20 @@ def base100_d(txt):
 
 
 @dec
+def rail_fences_e(txt):
+    from cipher.Crypto_railFence import encryptRailFence
+    lst = []
+    for i in range(2, 10):
+        r = encryptRailFence(txt.decode(), i)
+        lst.append(r)
+    return '\n'.join(lst)
+
+
+@dec
 def rail_fences_d(txt):
     from cipher.Crypto_railFence import decryptRailFence
     lst = []
-    for i in range(1, 10):
+    for i in range(2, 10):
         r = decryptRailFence(txt.decode(), i, 0)
         lst.append(r)
     return '\n'.join(lst)
@@ -347,7 +357,7 @@ def z_100_brainfuck(data):
 @dec
 def a02_transtable(txt):
     from cipher.Crypto_trans_table import main as a00_trans_table
-    return ea00_trans_table(txt.decode())
+    return a00_trans_table(txt.decode())
 
 
 class __Test(unittest.TestCase):
