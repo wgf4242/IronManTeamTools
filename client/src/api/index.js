@@ -49,6 +49,22 @@ async function download_file_template(data) {
     return [response.blob(), name]
 }
 
+async function imgPixel(data) {
+    const requestOptions = {
+        method: 'POST',
+        body: data
+    };
+    let response = await fetch('/api/img_pixel', requestOptions);
+    return response.text();
+}
+async function binfuzz(data) {
+    const requestOptions = {
+        method: 'POST',
+        body: data
+    };
+    let response = await fetch('/api/binfuzz', requestOptions);
+    return response.text();
+}
 async function WordFrequecy(data) {
     const requestOptions = {
         method: 'POST',
@@ -72,4 +88,4 @@ async function decryptAes(data) {
     return response.text();
 }
 
-export {getWordlists, decryptAes, decryptLSBAes, WordFrequecy, reverse_file, decryptLSB}
+export {getWordlists, decryptAes, decryptLSBAes, WordFrequecy, reverse_file, decryptLSB, binfuzz, imgPixel}

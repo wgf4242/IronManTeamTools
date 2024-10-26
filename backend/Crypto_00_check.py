@@ -65,9 +65,26 @@ def a01_swapcase(txt: bytes):
 
 @dec
 def base64_d(txt):
-    r = base64.b64decode(txt)
-    print('base64 is \t\t' + r.decode('utf8', errors='ignore'))
-    return r
+    def decode_custom_base64(custom_alphabet):
+        encoded_string = "gerIfJjBRZf1RgbtRLR9TdJuRcuuStWuQgJtiZW9TgJzTdRvTLiuRtbqpb55"
+        standard_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+        cipher = encoded_string.translate(str.maketrans(custom_alphabet, standard_alphabet))
+        data = base64.b64decode(cipher)
+        return data.decode('utf-8', 'ignore')
+
+    r = base64.b64decode(txt).decode('utf8', errors='ignore')
+    # print('base64 is \t\t' + r.decode('utf8', errors='ignore'))
+
+    megan35 = "3GHIJKLMNOPQRSTUb=cdefghijklmnopWXYZ/12+406789VaqrstuvwxyzABCDEF5"
+    atom128 = "/128GhIoPQROSTeUbADfgHijKLM+n0pFWXY456xyzB7=39VaqrstJklmNuZvwcdEC"
+    Zong22 =  "ZKj9n+yf0wDVX1s/5YbdxSo=ILaUpPBCHg8uvNO4klm6iJGhQ7eFrWczAMEq3RTt2"
+    Hazz15 =  "HNO4klm6ij9n+J2hyf0gzA8uvwDEq3X1Q7ZKeFrWcVTts/MRGYbdxSo=ILaUpPBC5"
+    return '\n'.join(['std: '.ljust(9) + r,
+                      'megan35: ' + decode_custom_base64(megan35),
+                      'atom128: ' + decode_custom_base64(atom128),
+                      'Zong22:  ' + decode_custom_base64(Zong22),
+                      'Hazz15:  ' + decode_custom_base64(Hazz15),
+                      ])
 
 
 @dec

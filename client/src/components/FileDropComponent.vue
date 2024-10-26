@@ -11,6 +11,12 @@
 <script>
 import {ref} from "vue";
 
+function arrayBufferToAscii(buffer) {
+  const decoder = new TextDecoder('ascii'); // 使用 ASCII 编码
+  return decoder.decode(buffer);
+}
+
+
 export default {
   name: "FileDropComponent",
   emits: ['change', 'changeObj'],
@@ -27,10 +33,12 @@ export default {
         const reader = new FileReader();
         reader.onload = (e) => {
           const fileContent = e.target.result;
-          ctx.emit('change', fileContent);
+          ctx.emit('change', arrayBufferToAscii(fileContent));
+          ctx.emit('blob', fileContent);
           ctx.emit('changeObj', fileObj.value);
         };
-        reader.readAsText(file);
+        // reader.readAsText(file);
+        reader.readAsArrayBuffer(file);
       }
     }
 

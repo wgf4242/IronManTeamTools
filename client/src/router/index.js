@@ -14,6 +14,7 @@ const router = createRouter({
     {path: '/binary', name: 'binary', component: () => import('@/views/ciphers/CryptoBinary.vue')},
     {path: '/reverse_file', name: 'reverse_file', component: () => import('@/views/ciphers/ReverseFile.vue')},
     {path: '/url_component', name: 'url_component', component: () => import('@/views/web/URLComponent.vue')},
+    {path: '/image_pixel', name: 'image_pixel', component: () => import('@/views/image/ImagePixel.vue')},
 
     {
       path: '/about',

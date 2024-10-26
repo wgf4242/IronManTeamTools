@@ -3,16 +3,17 @@
   <p>
     <button @click="handleBinary(result)">二进制测试</button>
   </p>
-  <FileDropComponent @change="test"/>
+  <FileDropComponent @blob="handleBlob" @change="test"/>
 
-  <pre>{{ result }}
-  </pre>
+  <pre>{{ result }}</pre>
+  <pre>{{ resultBlob }}</pre>
 
 </template>
 
 <script>
 import FileDropComponent from "@/components/FileDropComponent.vue";
 import {ref} from "vue";
+import { binfuzz } from '@/api/index.js'
 
 
 export default {
@@ -45,7 +46,11 @@ export default {
     const test = (data) => {
       result.value = handleBinary(data);
     }
-    return {test, handleBinary, result}
+    const resultBlob = ref('')
+    const handleBlob = async (data) => {
+      resultBlob.value = await binfuzz(data)
+    }
+    return {test, handleBinary, result, handleBlob, resultBlob}
   }
 }
 </script>

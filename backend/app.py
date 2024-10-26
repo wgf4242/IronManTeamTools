@@ -182,6 +182,19 @@ async def decrypt_aes(request: Request):
         return '失败'
     return res
 
+@app.post("/api/img_pixel", response_class=HTMLResponse)
+async def img_pixel(file: UploadFile = File(...), start_x: int = Form(0), start_y: int = Form(0), gap: int = Form(10)):
+    req_info = await file.read()
+    from cipher.misc_image_pixel import image_pixel
+    return image_pixel(req_info, start_x, start_y, gap)
+@app.post("/api/binfuzz", response_class=HTMLResponse)
+async def bin_fuzz(request: Request):
+    req_info = await request.body()
+    from cipher.misc_binary_fuzz import process_text
+    b1 = process_text(req_info, 4) or ''
+    b2 = process_text(req_info, 6) or ''
+    b3 = process_text(req_info, 8) or ''
+    return '\n'.join([b1, b2, b3])
 
 @app.post("/getInformation")
 async def getInformation(info: Request):

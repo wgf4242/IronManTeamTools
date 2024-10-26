@@ -21,6 +21,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/binary"><li class="item">Binary fuzz</li></RouterLink>
         <RouterLink to="/reverse_file"><li class="item">文件逆序</li></RouterLink>
         <RouterLink to="/url_component"><li class="item">URL/GET转码</li></RouterLink>
+        <RouterLink to="/image_pixel"><li class="item">图像像素</li></RouterLink>
         <li class="item"></li>
         <li class="item"></li>
       </ul>
