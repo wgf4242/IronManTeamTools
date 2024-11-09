@@ -1,13 +1,10 @@
 <template>
   <h1>LSB</h1>
 
-  <div id="dropZone"
-       @dragover.prevent
-       @drop="handleDrop"
-  >将文件拖拽到此处
-  </div>
+  <div id="dropZone" @dragover.prevent @drop="handleDrop">将文件拖拽到此处</div>
+  <canvas id="canvas" style="display: none;"></canvas>
   <div>文件信息: <span class="red">{{ fileObj?.name }}</span> </div>
-  <!--  <input v-model="key" type="text" placeholder="KEY">-->
+  <div>key: <input v-model="key" type="text" placeholder="KEY"></div>
 <!--  <p><button @click="submit">Decrypt</button></p>-->
 
   <table>
@@ -43,6 +40,10 @@
     <tr>
       <td><pre>{{data_lsb}}</pre></td>
     </tr>
+    <tr>
+      <td><button @click="jihad">PixelJihad</button></td>
+      <td>{{jihad_value}}</td>
+    </tr>
     </tbody>
   </table>
 
@@ -51,6 +52,7 @@
 <script>
 import {ref, onMounted} from "vue";
 import {decryptAes, decryptLSBAes, getWordlists, decryptLSB} from '@/api/index.js'
+import {decode,importImage} from './crypto/PixelJihad.js'
 
 export default {
   name: "Crypto_AES",
@@ -60,6 +62,7 @@ export default {
     const key = ref('');
     const clock_pixel_lsb = ref('');
     const fileObj = ref(null);
+    const jihad_value = ref('');
 
     const wordlists = ref([])
     const select = ref('')
@@ -121,14 +124,26 @@ export default {
         // };
         // reader.readAsText(file);
       }
+
+      initCanvas()
     }
+    const initCanvas = () => {
+      importImage(fileObj.value)
+    };
+
+    const jihad = () => {
+      const password = key.value;
+      jihad_value.value = decode(password);
+    }
+
     return {
       submit, enc, plain, wordlists, submitBatch,
       select, key,
       handleDrop,
       fileObj,
       clock_pixel_lsb,
-      btnLSB,data_lsb
+      btnLSB,data_lsb,
+      jihad,jihad_value
     }
   }
 }

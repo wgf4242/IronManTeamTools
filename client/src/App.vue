@@ -15,7 +15,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <li class="item bg-white">工具列表</li>
         <RouterLink to="/common">  <li class="item">常规解码</li></RouterLink>
         <RouterLink to="/aes"><li class="item">AES/DES/3DES/Rabbit</li></RouterLink>
-        <RouterLink to="/lsb"><li class="item">LSB</li></RouterLink>
+        <RouterLink to="/lsb"><li class="item">LSB/PNG图片</li></RouterLink>
         <RouterLink to="/frequency"><li class="item">词频统计</li></RouterLink>
         <RouterLink to="/coordinate"><li class="item">Draw Coordinate</li></RouterLink>
         <RouterLink to="/binary"><li class="item">Binary fuzz</li></RouterLink>

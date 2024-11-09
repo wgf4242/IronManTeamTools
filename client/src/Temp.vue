@@ -46,7 +46,6 @@ export default {
         return res.json()
       }).then(r => plain.value = r)
     }
-    console.log('123')
     return {test, copy, enc, plain}
   }
 }
