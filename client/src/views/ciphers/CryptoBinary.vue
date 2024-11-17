@@ -21,10 +21,25 @@ export default {
   components: {FileDropComponent},
   setup() {
     const result = ref('');
+
+    const checkMorse = (data) => {
+      // data 每2个字符切分为1 组
+      const data1 = data.match(/.{1,2}/g)
+      if (new Set(data1).size === 3 || new Set(data).size === 3) {
+        return 'Morse Code'
+      }
+      return 'Not morse Code';
+    }
     const handleBinary = data => {
       // 判断字符串是否只包含两种字符
       data = data.replaceAll(' ', '')
       let uniqueChars = [...new Set(data)];
+
+      let isMorse = checkMorse(data)
+      if (isMorse) {
+        return isMorse
+      }
+
       if (uniqueChars.length !== 2) {
         return '字符串不符合要求';
       }
