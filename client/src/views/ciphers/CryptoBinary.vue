@@ -38,13 +38,9 @@ export default {
       // 生成所有可能的映射组合
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-          if (j === i) {
-            continue
-          } // 跳过重复的情况
+          if (j === i) continue // 跳过重复的情况
           for (let k = 0; k < 3; k++) {
-            if (k === i || k === j) {
-              continue
-            } // 跳过重复的情况
+            if (k === i || k === j) continue // 跳过重复的情况
             const morseMap = {
               [uniqueGroups[0]]: morseChars[i],
               [uniqueGroups[1]]: morseChars[j],
@@ -60,7 +56,7 @@ export default {
         }
       }
 
-      return possibilities.length ? possibilities.join('\n') : 'Not morse Code'
+      return possibilities.length ? 'Morse Code: \n' + possibilities.join('\n') : 'Not morse Code'
     }
 
     const handleBinary = data => {
