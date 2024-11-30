@@ -59,9 +59,9 @@ export default {
       return possibilities.length ? 'Morse Code: \n' + possibilities.join('\n') : 'Not morse Code'
     }
 
-    const handleBinary = data => {
+    const handleBinary = dataOri => {
       // 判断字符串是否只包含两种字符
-      data = data.replaceAll(' ', '')
+      const data = dataOri.replaceAll(' ', '')
       let uniqueChars = [...new Set(data)]
 
       let isMorse = checkMorse(data)
@@ -69,9 +69,19 @@ export default {
         return isMorse
       }
 
+
       if (uniqueChars.length !== 2) {
         return '字符串不符合要求'
       }
+
+      // % 7 == 0 为补0的2进制
+      if (data.length % 7 === 0) {
+        // let a = 1
+      }
+
+      // if (data % 7 == 0) {
+      //   console.log()
+      // }
       const [char1, char2] = uniqueChars
       let str2 = data.replaceAll(char1, '1').replaceAll(char2, '0')
       let str1 = data.replaceAll(char1, '0').replaceAll(char2, '1')
