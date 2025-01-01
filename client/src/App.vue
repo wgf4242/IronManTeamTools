@@ -23,6 +23,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/url_component"><li class="item">URL/GET转码</li></RouterLink>
         <RouterLink to="/bypass"><li class="item">Bypass</li></RouterLink>
         <RouterLink to="/image_pixel"><li class="item">图像像素</li></RouterLink>
+        <RouterLink to="/image/picture-process"><li class="item">图片处理</li></RouterLink>
         <li class="item"></li>
         <li class="item"></li>
       </ul>

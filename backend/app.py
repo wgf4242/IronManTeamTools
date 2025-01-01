@@ -35,6 +35,9 @@ import mimetypes
 custom_mimetype = mimetypes.add_type("application/javascript", ".js", True)
 
 app = FastAPI()
+from router import pictures
+app.include_router(pictures.router)
+
 origins = ["*"]
 
 app.add_middleware(
@@ -201,7 +204,6 @@ async def getInformation(info: Request):
     req_info = await info.body()
     # req_info = await info.json()
     return req_info
-
 
 # from uvicorn import main
 import uvicorn

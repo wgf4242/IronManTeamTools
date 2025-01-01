@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import PictureProcess from '@/views/image/PictureProcess.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,11 @@ const router = createRouter({
     {path: '/url_component', name: 'url_component', component: () => import('@/views/web/URLComponent.vue')},
     {path: '/bypass', name: 'bypass', component: () => import('@/views/web/ByPass.vue')},
     {path: '/image_pixel', name: 'image_pixel', component: () => import('@/views/image/ImagePixel.vue')},
+    {
+      path: '/image/picture-process',
+      name: 'PictureProcess',
+      component: PictureProcess
+    },
 
     {
       path: '/about',
