@@ -1,0 +1,16 @@
+config.json
+node_modules
+
+.idea
+.vite
+*.log
+*.class
+
+venv
+backend/venv
+
+dist/
+client/dist/*
+*.jar
+
+!client/dist/**/*.py

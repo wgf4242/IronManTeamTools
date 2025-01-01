@@ -13,3 +13,5 @@ wordninja
 requests-html
 lxml_html_clean
 ddddocr
+pythonnet
+JPype1
