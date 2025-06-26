@@ -107,3 +107,30 @@ module.exports = {
 	encode: encode,
 	decode: decode
 };
+
+// 类似 Python 中的 if __name__ == '__main__'
+if (require.main === module) {
+	// 当直接运行此文件时执行的代码
+	console.log('XXEncode 测试开始...');
+	
+	// 测试编码
+	var testString = 'Hello, World! 你好世界!';
+	console.log('原始字符串:', testString);
+	
+	var encoded = encode(testString);
+	console.log('编码结果:');
+	console.log(encoded);
+	
+	// 测试解码
+	var decoded = decode(encoded);
+	console.log('解码结果:', decoded);
+	
+	// 验证结果
+	if (testString === decoded) {
+		console.log('✓ 测试通过：编码解码结果一致');
+	} else {
+		console.log('✗ 测试失败：编码解码结果不一致');
+	}
+	
+	console.log(decode('bNalVNrgkPaltLrIpLohiA5RTAHRTF1-iHnRTJ1BgAJxjBqVZQbBx'));
+}
