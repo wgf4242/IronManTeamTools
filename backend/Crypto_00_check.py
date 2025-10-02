@@ -235,6 +235,11 @@ def base91_d(txt):
     import base91
     return base91.decode(txt.decode('utf8')).decode('utf8')
 
+@dec
+def uuencode_d(txt):
+    from cipher.Crypto_uuencode import decode_uuencode
+    return decode_uuencode(txt.decode('utf8')).decode('utf8')
+
 
 @dec
 def reverse_hex_d(txt):
