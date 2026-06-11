@@ -7,6 +7,7 @@
 2. 安装nodejs
 3. python app.py
 4. 添加爆破字典: 将文件放在wordlists里。
+5.  stegtools放到 client/dist/tools/目录下
 
 ## 开发者环境部署
 1. 安装好nodejs环境。

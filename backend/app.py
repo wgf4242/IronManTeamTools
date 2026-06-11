@@ -67,17 +67,32 @@ async def redirect_to_static():
     return RedirectResponse(url="/main")
 
 
-# async def static_endpoint(request: Request):
-#     return templates.TemplateResponse("static/index.html", {"request": request})
+index_html_content = None
+template_path = Path("static/index.html")
+if template_path.exists():
+    with open(template_path, "r", encoding="utf-8") as f:
+        index_html_content = f.read()
+
 @app.get("/main")
 @app.get("/main/{rest_of_path:path}", response_class=HTMLResponse)
 async def static_endpoint(request: Request, rest_of_path: str = ""):
-    try:
-        return templates.TemplateResponse("static/index.html", {"request": request})
-    except TemplateNotFound:
+    if index_html_content is not None:
+        return HTMLResponse(content=index_html_content)
+    else:
         return HTMLResponse(content="<h1>Hello, This is backend Server.</h1>")
-    # 旧的版本才支持 mimetype 参数
-    # return templates.TemplateResponse("static/index.html", {"request": request}, mimetypes=custom_mimetype)
+
+
+# async def static_endpoint(request: Request):
+#     return templates.TemplateResponse("static/index.html", {"request": request})
+# @app.get("/main")
+# @app.get("/main/{rest_of_path:path}", response_class=HTMLResponse)
+# async def static_endpoint(request: Request, rest_of_path: str = ""):
+#     try:
+#         return templates.TemplateResponse("static/index.html", {"request": request})
+#     except TemplateNotFound:
+#         return HTMLResponse(content="<h1>Hello, This is backend Server.</h1>")
+#     # 旧的版本才支持 mimetype 参数
+#     # return templates.TemplateResponse("static/index.html", {"request": request}, mimetypes=custom_mimetype)
 
 
 @app.get("/main/{rest_of_path:path}", response_class=HTMLResponse)
